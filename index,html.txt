@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Arsh ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+}
+
+#surpriseBtn {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #ff4b6e;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#surpriseBtn:hover {
+    transform: scale(1.05);
+}
+
+.card {
+    display: none;
+    background: rgba(255,255,255,0.2);
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    color: white;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.heart {
+    font-size: 30px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0%, 100% {transform: scale(1);}
+    50% {transform: scale(1.2);}
+}
+
+/* Confetti Canvas */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+    <button id="surpriseBtn" onclick="showSurprise()">Click For A Surprise 💝</button>
+
+    <div class="card" id="loveCard">
+        <h1>Happy Valentine’s Day Arsh ❤️</h1>
+        <div class="heart">💖</div>
+        <p>
+            My Dearest Arsh,<br><br>
+            You are the most beautiful blessing in my life.  
+            I pray that Allah fills your heart with peace, your path with success,  
+            and your life with endless happiness.  
+            May our love grow stronger with every heartbeat,  
+            and may we always stay together with faith, trust, and loyalty.  
+            You are my dua, my comfort, and my forever. 💕
+        </p>
+    </div>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let confetti = [];
+let confettiCount = 120;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function createConfetti() {
+    for (let i = 0; i < confettiCount; i++) {
+        confetti.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 6 + 2,
+            color: `hsl(${Math.random() * 360},100%,60%)`,
+            speed: Math.random() * 3 + 2
+        });
+    }
+}
+
+function drawConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confetti.forEach((c) => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+        c.y += c.speed;
+        if (c.y > canvas.height) {
+            c.y = -10;
+            c.x = Math.random() * canvas.width;
+        }
+    });
+    requestAnimationFrame(drawConfetti);
+}
+
+function showSurprise() {
+    document.getElementById("surpriseBtn").style.display = "none";
+    document.getElementById("loveCard").style.display = "block";
+    createConfetti();
+    drawConfetti();
+}
+</script>
+
+</body>
+</html>
